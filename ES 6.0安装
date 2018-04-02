@@ -1,0 +1,22 @@
+
+1   下载elasticsearch6.0
+2   elastic-head安装   ---> 选择master版本
+
+     elasticsearch5.0 版本以后，不能下载head直接安装
+     需要安装nodeJS
+
+3 node.js 安装：
+
+4 安装grunt
+
+      进入NodeJS安装目录， 执行 npm install -g grunt  -cli  进行安装Grunt
+
+5 安装pathomjs
+
+      进入head目录，执行npm install 安装pathomjs
+
+6 运行head
+
+      grunt server -- 启动Head
+
+      ------- 可以到head根目录下修改Gruntfile.js文件的启动端口，默认是9100
