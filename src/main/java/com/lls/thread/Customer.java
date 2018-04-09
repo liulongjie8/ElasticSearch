@@ -3,23 +3,40 @@ package com.lls.thread;
 import com.lls.util.ElasticSearchUtil;
 import com.lls.util.SpringUtil;
 
+/**
+ * 消费者
+ */
 public class Customer {
-    private static  ElasticSearchUtil util = SpringUtil.getBean(ElasticSearchUtil.class);
-    public static Runnable getRunbale(){
+
+
+    private Storage storage;
+
+    private ElasticSearchUtil util = SpringUtil.getBean(ElasticSearchUtil.class);
+
+
+    public  Runnable getRunbale() {
         return new Runnable() {
             @Override
             public void run() {
-                Resource resource = new Resource();
-                do {
+                while(true){
                     try {
-                        resource = SingleQueue.sharedQueue.take();
+                        System.out.println(Thread.currentThread().getName());
+
+                        Resource resource = storage.pop();
+                        if("end".equals(resource.getIndex())){
+                            util.recordPublisedTime();
+                            break;
+                        }
                         util.BulkProcessAdd(resource.getIndex(), resource.getType(), resource.getDocument());
-                    } catch (InterruptedException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }while(!"end".equals(resource.getIndex()));
+                }
             }
         };
     }
 
+    public Customer( Storage storage) {
+        this.storage = storage;
+    }
 }

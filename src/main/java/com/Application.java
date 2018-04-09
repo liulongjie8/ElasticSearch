@@ -1,6 +1,6 @@
 package com;
 
-import com.lls.server.Service;
+import com.lls.util.ElasticSearchUtil;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
@@ -25,14 +25,15 @@ import java.util.Date;
  */
 @SpringBootApplication
 @RestController
-@MapperScan("com.lls.mapper")
 public class Application {
 
     @Autowired
     private TransportClient client;
 
     @Autowired
-    private Service service;
+    private ElasticSearchUtil util;
+
+
 
     @Autowired
     private com.lls.thread.Service threadService;
@@ -42,21 +43,18 @@ public class Application {
         return "index";
     }
 
-    @RequestMapping("/init/{index}/{type}")
-    public ResponseEntity init(@PathVariable String index, @PathVariable String type){
-        try {
-            service.init(index, type);
-            return  new ResponseEntity(HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return  new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
+    @RequestMapping("record")
+    public String record() throws  Exception{
+        util.recordPublisedTime();
+        return "index";
     }
+
 
     @RequestMapping("/thread/{index}/{type}")
     public ResponseEntity thread(@PathVariable String index, @PathVariable String type){
         try {
-            threadService.start(index, type);
+            threadService.start();
             return  new ResponseEntity(HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

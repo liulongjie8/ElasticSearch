@@ -21,7 +21,7 @@ public class Resource {
     /**
      *文档数据
      */
-    private List<Map> document;
+    private List<Map<String,Object>> document;
 
 
     public String getIndex() {
@@ -40,15 +40,15 @@ public class Resource {
         this.type = type;
     }
 
-    public List<Map> getDocument() {
+    public List<Map<String,Object>> getDocument() {
         return document;
     }
 
-    public void setDocument(List<Map> document) {
+    public void setDocument(List<Map<String, Object>> document) {
         this.document = document;
     }
 
-    public Resource(String index, String type, List<Map> document) {
+    public Resource(String index, String type, List<Map<String, Object>> document) {
         this.index = index;
         this.type = type;
         this.document = document;

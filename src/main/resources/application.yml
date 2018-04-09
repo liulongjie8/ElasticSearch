@@ -1,0 +1,34 @@
+
+# 数据库配置
+spring:
+  datasource:
+       driverClassName: oracle.jdbc.driver.OracleDriver
+       url: jdbc:oracle:thin:@192.168.10.151:1521:xbzx
+       username: zr_metadata
+       password: oracle
+       tomcat:
+          max-wait: 10000
+          max-active: 30
+          test-on-borrow: true
+
+# 日志记录
+logging:
+    level:
+       root: WARN
+       org.springframework.web: DEBUG
+       org.hibernate: ERROR
+
+
+# elasticsearch 同步参数
+elasticsearch:
+  ansy:
+    p-thread-num: 4
+    c-thread-num: 8
+    page-size: 7000
+    cluster-name: my-application
+    ips:
+     - ip: 192.168.10.202
+       port: 9300
+    sqls:
+         t_base_legal_identity: "SELECT  t.* , trunc(lat, 2)||','||trunc(lng, 2) as point FROM t_base_legal_identity t where t.is_peat=1 and t.code!=0 and t.MODIFY_DATE >= ? "
+          t_l_xc10101: "SELECT  t.*  FROM t_l_xc10101 t where t.is_peat=1 and t.m_010101!=0 and  t.MODIFY_DATE >= ? "
