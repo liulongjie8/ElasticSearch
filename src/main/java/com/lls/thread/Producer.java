@@ -1,5 +1,6 @@
 package com.lls.thread;
 
+import com.lls.config.ElasticSearchConfig;
 import org.springframework.jdbc.core.JdbcTemplate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

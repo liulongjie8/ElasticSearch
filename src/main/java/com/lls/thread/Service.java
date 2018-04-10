@@ -1,5 +1,6 @@
 package com.lls.thread;
 
+import com.lls.config.ElasticSearchConfig;
 import com.lls.util.ElasticSearchUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

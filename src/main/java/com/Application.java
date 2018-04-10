@@ -6,7 +6,6 @@ import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,8 +31,6 @@ public class Application {
 
     @Autowired
     private ElasticSearchUtil util;
-
-
 
     @Autowired
     private com.lls.thread.Service threadService;
@@ -96,9 +93,6 @@ public class Application {
             return  new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
-
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class);

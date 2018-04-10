@@ -1,4 +1,4 @@
-package com.lls.thread;
+package com.lls.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
